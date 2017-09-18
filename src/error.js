@@ -3,6 +3,9 @@ import deserializeError from 'deserialize-error'
 
 function serializeErrorWithoutStack (err) {
   delete err.stack
+  if (err && typeof err === 'function') {
+    err = err.toJSON();
+  }
   return serializeError(err)
 }
 
